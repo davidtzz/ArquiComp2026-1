@@ -1,53 +1,5 @@
-.data
-mensaje1: .asciiz "Adivina el numero (1-10): "
-mayor:    .asciiz "Muy alto\n"
-menor:    .asciiz "Muy bajo\n"
-ganaste:  .asciiz "¡Ganaste!\n"
+addi $t1, $zero,  -60
 
-numeroSecreto: .word 7
+addi $t2, $t1, 124
 
-.text
-.globl main
-
-main:
-
-loop:
-
-    # Mostrar mensaje
-    li $v0, 4
-    la $a0, mensaje1
-    syscall
-
-    # Leer numero
-    li $v0, 5
-    syscall
-    move $t0, $v0
-
-    # Cargar numero secreto
-    lw $t1, numeroSecreto
-
-    # Comparar
-    beq $t0, $t1, correcto
-
-    blt $t0, $t1, muyBajo
-
-muyAlto:
-    li $v0, 4
-    la $a0, mayor
-    syscall
-    j loop
-
-muyBajo:
-    li $v0, 4
-    la $a0, menor
-    syscall
-    j loop
-
-correcto:
-    li $v0, 4
-    la $a0, ganaste
-    syscall
-
-    # Salir
-    li $v0, 10
-    syscall
+add $t0, $t2, $t1
